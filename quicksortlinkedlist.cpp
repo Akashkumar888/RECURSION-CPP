@@ -26,23 +26,19 @@ void printList(struct Node* head) {
 class Solution {
 public:
     // Partition function for linked list
-    struct Node* partition(struct Node* head, struct Node* last) {
-        struct Node* i = head;  // Pointer to divide nodes less than the pivot
-        struct Node* j = head->next;  // Pointer to iterate over the list
-
-        // Partitioning around head as pivot
-        while (j != last) {
-            if (j->data < head->data) {
-                i = i->next;  // Move i to the next node
-                swap(i->data, j->data);  // Swap data between i and j
-            }
-            j = j->next;  // Move j to the next node
-        }
-        // Swap the pivot with i to place the pivot at its correct position
-        swap(i->data, head->data);
-        return i;  // Return the new pivot node
-    }
-
+    struct Node* partition(struct Node* head, struct Node* last){
+      struct Node* pos = head;
+      struct Node* temp = head->next;
+      while(temp!=last){
+          if(temp->data < head->data){
+              pos=pos->next;
+              swap(pos->data,temp->data);
+          }
+          temp=temp->next;
+      }
+      swap(pos->data,head->data);
+      return pos;
+  }
     // Recursive QuickSort function for linked list
     void Quick_Sort(struct Node* head, struct Node* last) {
         if (head == last || head->next == last) {
